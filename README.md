@@ -1,4 +1,4 @@
-# DIAFLO_BEA
+# DIALFLO_BEA
 
 A high-performance, scalable backend system for handling customer support queries. The system classifies user queries, fetches responses, caches frequent requests, and stores interactions efficiently.
 
