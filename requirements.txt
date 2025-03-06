@@ -1,0 +1,23 @@
+# FastAPI and ASGI server
+fastapi[all]
+uvicorn
+
+# Database and ORM
+sqlalchemy
+asyncpg
+psycopg2-binary
+
+# Task queue and Redis client
+celery
+redis
+
+# Data validation
+pydantic
+
+# Environment variables
+python-dotenv
+
+# Testing
+pytest 
+httpx 
+pytest-asyncio

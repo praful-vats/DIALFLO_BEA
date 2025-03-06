@@ -1,0 +1,88 @@
+# for local redis
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      CELERY_BROKER_URL: redis://$REDIS_HOST:$REDIS_PORT/0
+
+  worker:
+    build: .
+    command: celery -A app.workers.tasks worker --loglevel=info
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      CELERY_BROKER_URL: redis://$REDIS_HOST:$REDIS_PORT/0
+
+
+
+# for AWS elasticahe
+
+# services:
+#   api:
+#     build: .
+#     ports:
+#       - "8000:8000"
+#     depends_on:
+#       - db
+#       - redis
+#     environment:
+#       POSTGRES_USER: ${POSTGRES_USER}
+#       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+#       POSTGRES_DB: ${POSTGRES_DB}
+#       POSTGRES_HOST: db
+#       POSTGRES_PORT: ${POSTGRES_PORT}
+#       REDIS_HOST: redis
+#       REDIS_PORT: ${REDIS_PORT}
+#       CELERY_BROKER_URL: redis://redis:6379/0
+
+#   worker:
+#     build: .
+#     command: celery -A app.workers.tasks worker --loglevel=info
+#     depends_on:
+#       - api
+#       - redis
+#     environment:
+#       POSTGRES_USER: ${POSTGRES_USER}
+#       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+#       POSTGRES_DB: ${POSTGRES_DB}
+#       POSTGRES_HOST: db
+#       POSTGRES_PORT: ${POSTGRES_PORT}
+#       REDIS_HOST: redis
+#       REDIS_PORT: ${REDIS_PORT}
+#       CELERY_BROKER_URL: redis://redis:6379/0
+
+#   db:
+#     image: postgres:15
+#     restart: always
+#     environment:
+#       POSTGRES_USER: ${POSTGRES_USER}
+#       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+#       POSTGRES_DB: ${POSTGRES_DB}
+#     ports:
+#       - "5432:5432"
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+
+#   redis:
+#     image: redis:latest
+#     restart: always
+#     ports:
+#       - "6379:6379"
+
+# volumes:
+#   postgres_data:
