@@ -1,6 +1,6 @@
 # DIALFLO_BEA
 
-A high-performance, scalable backend system for handling customer support queries. The system classifies user queries, fetches responses, caches frequent requests, and stores interactions efficiently.
+A scalable and high-performance backend system designed for a voice AI customer support agent. This system enables seamless customer interactions by classifying queries, providing predefined responses, caching frequent requests, and efficiently storing interactions in a database.
 
 ---
 
