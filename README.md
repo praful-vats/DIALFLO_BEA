@@ -17,32 +17,32 @@ A high-performance, scalable backend system for handling customer support querie
 
 ## Setup & Installation
 
-### **1️⃣ Clone Repository**
+### **1️ Clone Repository**
 ```sh
 git clone https://github.com/praful-vats/Diaflo_BEA.git
 cd diaflo_bea
 ```
 
-### **2️⃣ Create a Virtual Environment**
+### **2️ Create a Virtual Environment**
 ```sh
 python -m venv venv
 source venv/bin/activate  # macOS/Linux
 venv\Scripts\activate  # Windows
 ```
 
-### **3️⃣ Install Dependencies**
+### **3️ Install Dependencies**
 ```sh
 pip install -r requirements.txt
 ```
 
-### **4️⃣ Set Up Environment Variables**
+### **4️ Set Up Environment Variables**
 Create a `.env` file and add the following:
 ```env
 DATABASE_URL=your_database_url
 REDIS_URL=your_redis_url
 ```
 
-### **5️⃣ Start the Server**
+### **5️ Start the Server**
 ```sh
 uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
@@ -52,7 +52,7 @@ The server will run at: **http://localhost:8000**
 
 ## API Documentation
 
-### **🔹 Process Query**
+### ** Process Query**
 - **Endpoint:** `POST /query`
 - **Description:** Classifies the query and returns a response.
 - **Request Body:**
@@ -72,7 +72,7 @@ The server will run at: **http://localhost:8000**
 }
 ```
 
-### **🔹 Get Interaction History**
+### ** Get Interaction History**
 - **Endpoint:** `GET /interactions/{customer_id}`
 - **Description:** Fetches past interactions for a customer.
 - **Response:**
@@ -93,12 +93,12 @@ The server will run at: **http://localhost:8000**
 
 ## Running Tests
 
-### **1️⃣ Install Test Dependencies**
+### **1️ Install Test Dependencies**
 ```sh
 pip install pytest httpx pytest-asyncio
 ```
 
-### **2️⃣ Run Tests**
+### **2️ Run Tests**
 ```sh
 pytest -v
 ```
@@ -107,17 +107,17 @@ pytest -v
 
 ## Deployment
 
-### **1️⃣ Build Docker Image**
+### **1️ Build Docker Image**
 ```sh
 docker build -t diaflo .
 ```
 
-### **2️⃣ Run with Docker**
+### **2️ Run with Docker**
 ```sh
 docker run -p 8000:8000 --env-file .env diaflo
 ```
 
-### **3️⃣ Deploy on AWS EC2**
+### **3️ Deploy on AWS EC2**
 - Push the image to **AWS ECR**
 - Run on **EC2 instance**
 - Connect to **RDS (PostgreSQL)** & **ElastiCache (Redis)**
