@@ -6,27 +6,31 @@ import redis
 
 app = FastAPI(title="Diaflo_BEA")
 
+# Create database tables
 Base.metadata.create_all(bind=engine)
 
-# Security middleware
+# Add CORS middleware to allow cross-origin requests
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"], 
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["*"], 
     allow_headers=["*"],
 )
 
+# Health check endpoint
 @app.get("/api")
 def healthcheck():
     return {"status": "ok"}
 
+# Include API router
 app.include_router(query.router)
 
-
+# Redis configuration
 redis_host = "localhost"
 redis_port = 6379
 
+# Test connection to Redis
 @app.get("/test_redis")
 def test_redis():
     try:
@@ -34,5 +38,3 @@ def test_redis():
         return {"Redis Ping": r.ping()}
     except Exception as e:
         return {"error": str(e)}
-
-app.include_router(query.router)
